@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice Generator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.21/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+</head>
+
+<body>
+    <nav id="navbar">
+        <div class="left">
+            <div class="logo">
+                <h2>Invoice-Generator</h2>
+            </div>
+            <ul>
+                <a href="">Help</a>
+                <a href="">History</a>
+                <a href="">Invoicing Guide</a>
+            </ul>
+        </div>
+        <div class="right">
+            <i class="fa-solid fa-sun" id="light-icon" onclick="lightmode()"></i>
+            <div class="signIn">Sign In</div>
+            <div class="signUp">Sign Up</div>
+        </div>
+    </nav>
+    <main id="overallmain">
+        <div class="main-left">
+            <div class="box-input">
+                <div class="input-item">
+                    <div class="head">
+                        <div class="head-item">
+                            <div class="shop-logo"></div>
+                            <div class="shopname" id="displayName">S QUBE A COFFEE SHOP</div>
+                            <div class="bill">
+                                <div class="billTo">
+                                    <p>Bill To: </p>
+                                    <div id="customername"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="head-item2">
+                            <div class="invoice">
+                                <p>INVOICE</p>
+                                <div id="invoice-number"></div>
+                            </div>
+                            <div class="invoice-details">
+                                <div class="start">
+                                    <p>Date : </p>
+                                    <p>Payment Mode : </p>
+                                    <p>PO Number : </p>
+                                   
+                                </div>
+                                <div class="end">
+                                    <div class="show" id="date"></div>
+                                    <div class="show" id="payment-mode"></div>
+                                    <div class="show" id="Po-number">69524P12A1</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item-name">
+                        <table id="product_table">
+                            <thead>
+                                <tr class="t-row">
+                                    <!-- "Item" spans across more columns (e.g., 3) -->
+                                    <td colspan="3" id="heading">Item</td>
+                                    <td>Quantity</td>
+                                    <td>Rate</td>
+                                    <td>Amount</td>
+                                </tr>
+                            </thead>
+                            <tbody id="table_body">
+                                <!-- Data rows will be added dynamically using JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="sub_total">
+                        <div class="total_details">
+                            <div class="start start2">
+                                <p>SubTotal : </p>
+                                <p>Discount : </p>
+                                <p id="money">Total : </p>
+                            </div>
+                            <div class="end ">
+                                <div class="show" id="s_total"></div>
+                                <div class="show" id="discount"></div>
+                                <div class="show" id="Balance"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main-right" id="main-right">
+            <div class="input-details">
+                <form action="detail" onclick="showData(event)">
+                    <div>
+                        <label for="name">Enter Customer Name : </label>
+                        <input type="text" placeholder="Name" id="nameEnter">
+                    </div>
+                    <div>
+                        <label for="number">Enter Mobile Number : </label>
+                        <input type="number" placeholder="Mobile Number">
+                    </div>
+                    <div>
+                        <label for="payment">Choose Payment Option : </label>
+                        <select name="Payment" id="Payment-option">
+                            <option value="Choice">Choose</option>
+                            <option value="Online">Online</option>
+                            <option value="Cash">Cash</option>
+                            <option value="Card">Card</option>
+                        </select>
+                    </div>
+                </form>
+                <div class="download">
+                    <input type="button" value="Download" id="download">
+                </div>
+            </div>
+            <div class="input-details">
+                <form action="detail">
+                    <div>
+                        <label for="name">Product Name : </label>
+                        <input type="text" placeholder="Name" id="product_name">
+                    </div>
+                    <div>
+                        <label for="number">Quantity : </label>
+                        <input type="number" placeholder="Quantity" id="Quantity">
+                    </div>
+                    <div>
+                        <label for="number">Rate : </label>
+                        <input type="number" placeholder="Rate" id="rate">
+                    </div>
+                </form>
+                <button onclick="addItem(event)" id="add_item">+Add Item</button>
+            </div>
+        </div>
+    </main>
+    <script src="script.js"></script>
+</body>
+
+</html>
