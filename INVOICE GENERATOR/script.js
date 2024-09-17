@@ -38,21 +38,21 @@ function pricecal() {
 document.getElementById('add_item').addEventListener('click', addItem);
 
 function addItem(event) {
-    // Prevent the form from submitting or refreshing the page
+   
     event.preventDefault();
 
-    // Get input values and trim any extra spaces
+
     const productName = document.getElementById('product_name').value.trim();
     const quantity = document.getElementById('Quantity').value.trim();
     const rate = document.getElementById('rate').value.trim();
 
-    // Validate input to avoid adding empty rows
+
     if (!productName || !quantity || !rate || isNaN(quantity) || isNaN(rate)) {
-        // alert("Please fill in all the fields with valid data");
-        return; // Stop the function if validation fails
+       
+        return; 
     }
 
-    // Calculate amount
+
     const amount = quantity * rate;
 
     // Create a new table row
@@ -61,8 +61,8 @@ function addItem(event) {
 
     // Create a cell for "Item" and set its colspan to 3
     const itemNameCell = document.createElement('td');
-    itemNameCell.colSpan = 3;  // Match colspan with the header
-    itemNameCell.style.width = '200px';  // Apply width
+    itemNameCell.colSpan = 3;  
+    itemNameCell.style.width = '200px';  
     itemNameCell.textContent = productName;
 
     // Create individual cells for Quantity, Rate, and Amount
@@ -81,7 +81,7 @@ function addItem(event) {
     newRow.appendChild(rateCell);
     newRow.appendChild(amountCell);
 
-    // Append the new row to the table body (only after validation is successful)
+   
     tableBody.appendChild(newRow);
 
     // Optionally, store the new item in localStorage
@@ -97,7 +97,6 @@ function addItem(event) {
     document.getElementById('Balance').innerHTML = '';
 }
 
-// Function to store data in localStorage (optional)
 function storeInLocalStorage(productName, quantity, rate, amount) {
     const product = {
         productName,
@@ -119,7 +118,7 @@ function storeInLocalStorage(productName, quantity, rate, amount) {
 
 // Function to calculate subtotal, apply discount, and display results
 function updateInvoice() {
-    // Initialize subtotal
+ 
     let subtotal = 0;
 
     // Get all rows in the table body
@@ -128,7 +127,7 @@ function updateInvoice() {
 
     // Iterate through each row to calculate the subtotal
     for (const row of rows) {
-        // Assuming the amount is in the last cell of the row
+      
         const amountCell = row.getElementsByTagName('td')[3];
         if (amountCell) {
             const amount = parseFloat(amountCell.textContent.trim().replace('₹ ', ''));
@@ -222,8 +221,8 @@ function generatePDF() {
     const finalY = doc.autoTable.previous.finalY;
 
     // Add subtotal, discount, and total
-    const yStart = finalY + 10; // Start Y position for subtotal
-    const columnWidths = { 0: 120, 1: 30 }; // Define column widths for alignment
+    const yStart = finalY + 10; 
+    const columnWidths = { 0: 120, 1: 30 }; 
     const textValues = [
         { label: 'Subtotal:', value:'Rs '+document.getElementById('s_total').innerHTML },
         { label: 'Discount:', value:'Rs '+document.getElementById('discount').innerHTML },
@@ -232,13 +231,13 @@ function generatePDF() {
     
     // Function to apply a specific font style to these text values
     textValues.forEach(item => {
-        // Assuming these values are displayed somewhere on the page
-        let displayElement = document.createElement('div'); // Create a new div to show each value
+    
+        let displayElement = document.createElement('div'); 
         
         displayElement.innerHTML = `<span style="font-family: 'Arial', sans-serif; font-size: 16px;">${item.label} ${item.value}</span>`;
         
-        // Append the display element to the desired container in your HTML
-        document.body.appendChild(displayElement); // Change document.body to any other container where you want to display these values
+      
+        document.body.appendChild(displayElement); 
     });
     
 
@@ -253,7 +252,6 @@ function generatePDF() {
     doc.save('invoice.pdf');
 }
 
-// Attach the PDF generation function to the download button
 document.getElementById('download').addEventListener('click', generatePDF);
 
 
